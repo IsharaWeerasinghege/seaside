@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FaCalendarDay, FaUser, FaUsers} from "react-icons/fa";
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import * as Yup from "yup";
 import {Form, Formik} from "formik";
 import {Input} from "../elements";

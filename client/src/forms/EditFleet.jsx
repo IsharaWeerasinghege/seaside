@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import {Input, Textarea} from "../elements";
-import {FaAddressCard, FaImage, FaSave, FaUser, FaWarehouse} from "react-icons/fa";
+import {FaAddressCard, FaSave, FaUser, FaWarehouse} from "react-icons/fa";
 import {SiMinutemailer} from "react-icons/si";
 import {BsFillPhoneFill} from "react-icons/bs";
 import {BiCategory} from "react-icons/bi";

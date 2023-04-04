@@ -3,7 +3,6 @@ import {VscEmptyWindow} from "react-icons/vsc";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {setUser} from "../store/userSlice";
-import login from "./Login";
 import UserReservationTable from "../tables/UserReservationTable";
 import {Pagination} from "@material-ui/lab";
 

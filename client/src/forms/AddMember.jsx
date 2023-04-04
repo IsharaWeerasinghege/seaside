@@ -10,7 +10,6 @@ import {HiIdentification} from "react-icons/hi";
 import {RiBankCard2Fill} from "react-icons/ri";
 import axios from "axios";
 import Select from "../elements/Select";
-import {useParams} from "react-router-dom";
 
 const initialState = {
     name: '', address: '', phone: '', email: '', role: '', location: '', nic: '', password: '', city: '',

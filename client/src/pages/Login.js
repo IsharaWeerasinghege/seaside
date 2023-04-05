@@ -9,7 +9,6 @@ import {IoKeyOutline} from "react-icons/io5";
 import {RiUserLine} from "react-icons/ri";
 import axios from "axios";
 import CustomLoader from "../elements/CustomLoader";
-import {useNavigate} from "react-router-dom";
 
 
 const initialValues = {
@@ -24,7 +23,6 @@ const initialValues = {
 }
 
 const Login = () => {
-    const navigate = useNavigate();
     const [formData, setFormData] = useState(initialValues);
     const {login_email, login_password, name, email, password, confirm_password, phone, address} = formData;
     const [signUpError, setSignUpError] = useState('');
@@ -59,9 +57,12 @@ const Login = () => {
         setLoading(true)
         try {
             const {login_email, login_password} = formData;
-            const {data} = await axios.post('http://localhost:3001/signin', {email:login_email, password:login_password});
+            const {data} = await axios.post('http://localhost:3001/signin', {
+                email: login_email,
+                password: login_password
+            });
 
-            if (data.user){
+            if (data.user) {
                 const {token, name, role, id} = data.user;
                 localStorage.setItem('user', id);
                 localStorage.setItem('token', token);
@@ -110,7 +111,7 @@ const Login = () => {
     return (
         <div className={'w-full my-8'}>
             <div className="container mx-auto bg-white rounded-md p-8 shadow-lg flex relative">
-                {loading && <CustomLoader />}
+                {loading && <CustomLoader/>}
                 <div className={'flex flex-col gap-4 w-1/2 px-8 py-4 border-r'}>
                     <h1 className={'text-center font-semibold text-2xl mb-4'}>Login</h1>
                     <Formik
@@ -124,7 +125,7 @@ const Login = () => {
                             signInHandler();
                         }}
                     >
-                        {(form) => (
+                        {(formik) => (
                             <Form>
 
                                 <Input icon={<SiMinutemailer/>} type="text" name="login_email"

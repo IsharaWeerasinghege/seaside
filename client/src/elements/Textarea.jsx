@@ -14,7 +14,7 @@ const Input = ({icon, placeholder, ...props}) => {
             />
             {meta.touched && meta.error && (
                 <div className={'absolute bottom-[-20px] text-sm left-8 text-red-600'}>
-                    <ErrorMessage name={field.name}  />
+                    <ErrorMessage name={field.name}/>
                 </div>
             )}
         </div>

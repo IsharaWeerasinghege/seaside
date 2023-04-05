@@ -88,15 +88,19 @@ export const yachts = [
 ]
 
 export const sidebarLinks = [
-    {name: 'Dashboard', url: '/', role: [ 'admin_rhm', 'admin_fleet', 'admin_party', 'admin_shm', 'admin_feed', 'admin_crew']},
-    {name: 'Boat Reservation', url: '/reservation', role: [ 'admin_rhm', 'owner']},
-    {name: 'Onboard Party', url: '/party', role: [ 'admin_party', 'owner']},
-    {name: 'Fleet Management', url: '/fleet', role: [ 'admin_fleet', 'owner']},
-    {name: 'Add Fleet', url: '/fleet/add', role: [ 'admin_fleet', 'owner']},
-    {name: 'Crew Management', url: '/crew', role: [ 'admin_crew', 'owner']},
-    {name: 'Add Member', url: '/crew/add', role: [ 'admin_crew', 'owner']},
-    {name: 'Suppliers', url: '/suppliers', role: [ 'admin_shm', 'owner']},
-    {name: 'Add Suppliers', url: '/suppliers/add', role: [ 'admin_shm', 'owner']},
-    {name: 'User Feedback', url: '/feedback', role: [ 'admin_feed', 'owner']},
+    {
+        name: 'Dashboard',
+        url: '/',
+        role: ['admin_rhm', 'admin_fleet', 'admin_party', 'admin_shm', 'admin_feed', 'admin_crew']
+    },
+    {name: 'Boat Reservation', url: '/reservation', role: ['admin_rhm', 'owner']},
+    {name: 'Onboard Party', url: '/party', role: ['admin_party', 'owner']},
+    {name: 'Fleet Management', url: '/fleet', role: ['admin_fleet', 'owner']},
+    {name: 'Add Fleet', url: '/fleet/add', role: ['admin_fleet', 'owner']},
+    {name: 'Crew Management', url: '/crew', role: ['admin_crew', 'owner']},
+    {name: 'Add Member', url: '/crew/add', role: ['admin_crew', 'owner']},
+    {name: 'Suppliers', url: '/suppliers', role: ['admin_shm', 'owner']},
+    {name: 'Add Suppliers', url: '/suppliers/add', role: ['admin_shm', 'owner']},
+    {name: 'User Feedback', url: '/feedback', role: ['admin_feed', 'owner']},
 ]
 

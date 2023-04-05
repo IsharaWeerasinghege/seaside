@@ -15,12 +15,11 @@ const initialValues = {
 const Book = () => {
     const {id} = useParams()
     const [item, setItem] = useState('');
-    const [user, setUser] = useState(localStorage.getItem('user'));
+    const [user] = useState(localStorage.getItem('user'));
     const [booking, setBooking] = useState(initialValues);
     const {checkIn, guests} = booking;
     const [errors, setErrors] = useState('');
     const [success, setSuccess] = useState('');
-
 
     useEffect(() => {
         async function getData() {
@@ -28,11 +27,12 @@ const Book = () => {
                 .then(res => {
                     setItem(res.data)
                 }).catch(err => {
-                console.log(err.message)
+                    console.log(err.message)
                 })
         }
+
         getData();
-    },[])
+    }, [])
 
 
     const handleChange = (e) => {
@@ -63,7 +63,7 @@ const Book = () => {
             setSuccess('');
         }
 
-        setTimeout(()=>{
+        setTimeout(() => {
             setSuccess('');
             setErrors('');
         }, 10000)
@@ -103,7 +103,7 @@ const Book = () => {
                                     }
                                     }
                                 >
-                                    {(form) => (
+                                    {(formik) => (
                                         <Form className={'text-center'}>
                                             <Input icon={<FaCalendarDay/>} type="date" name="checkIn"
                                                    placeholder="Check in date"
@@ -128,7 +128,6 @@ const Book = () => {
                                         <span className="block sm:inline">{success}</span>
                                     </div>
                                 )}
-
                                 {errors && (
                                     <div
                                         className={'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'}
@@ -136,9 +135,7 @@ const Book = () => {
                                         <span className="block sm:inline">{errors}</span>
                                     </div>
                                 )}
-
                             </div>
-
                         ) : (
                             <div className={'flex flex-col justify-center items-center gap-4 h-full'}>
                                 <FaUser className={'text-5xl text-gray-400'}/>
@@ -152,8 +149,6 @@ const Book = () => {
                         )}
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

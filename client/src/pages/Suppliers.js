@@ -9,7 +9,6 @@ import {Pagination} from "@material-ui/lab";
 
 
 const Suppliers = () => {
-    const [tab, setTab] = useState('table');
     const dispatch = useDispatch();
     const {suppliers} = useSelector(state => state.supplier);
 

@@ -10,29 +10,36 @@ import UpdateMember from "../forms/UpdateMember";
 
 
 const Crew = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch();
     const {crew} = useSelector(state => state.crew);
 
 
+
     useEffect(() => {
-        getMembers();
-    }, [handleDelete]);
+        if (!isLoaded) {
+            async function getMembers() {
+                try {
+                    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/crew/list`, {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        }
+                    });
 
-    async function getMembers() {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/crew/list`, {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    dispatch(setCrew(response.data));
+                    setIsLoaded(true);
+                } catch (error) {
+                    console.log(error);
                 }
-            });
+            }
 
-            dispatch(setCrew(response.data));
-        } catch (error) {
-            console.log(error);
+            getMembers();
         }
-    }
+    }, [isLoaded, dispatch]);
 
-    async function handleDelete (id)  {
+
+
+    async function handleDelete(id) {
         if (window.confirm('Are you sure you want to delete this member?')) {
             if (id === localStorage.getItem('user')) {
                 alert('You cannot delete yourself');

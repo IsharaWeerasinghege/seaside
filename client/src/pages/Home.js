@@ -28,7 +28,7 @@ const Home = () => {
                     <Route path={'/'} element={<Main/>}/>
                     <Route path={'/yachts'} element={<Yachts/>}/>
                     <Route path={'/rent/:id'} element={<Book/>}/>
-                    <Route path={'/login'} element={<Login />}/>
+                    <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/profile'} element={<Profile/>}/>
                 </Routes>
             </div>

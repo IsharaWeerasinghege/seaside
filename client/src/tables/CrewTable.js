@@ -32,12 +32,12 @@ const CrewTable = ({crew, dashboard, handleDelete}) => {
                 </th>
                 {!dashboard && (
                     <>
-                    <th scope="col" className="px-4 py-2">
-                        Edit
-                    </th>
-                    <th scope="col" className="px-4 py-2">
-                        Delete
-                    </th>
+                        <th scope="col" className="px-4 py-2">
+                            Edit
+                        </th>
+                        <th scope="col" className="px-4 py-2">
+                            Delete
+                        </th>
                     </>
                 )}
 
@@ -69,22 +69,22 @@ const CrewTable = ({crew, dashboard, handleDelete}) => {
                     </td>
                     {!dashboard && (
                         <>
-                        <td className="px-4 py-2">
-                            <Link
-                                to={`edit/${item._id}`}
-                                className="font-medium text-white bg-blue-500 py-1 px-2 rounded cursor-pointer hover:bg-blue-800 "
-                            >
-                                Edit
-                            </Link>
-                        </td>
-                        <td className="px-4 py-2">
-                            <button
-                                className="font-medium text-white bg-red-500 py-1 px-2 rounded cursor-pointer hover:bg-red-800 "
-                                onClick={() => handleDelete(item._id)}
-                            >
-                                Delete
-                            </button>
-                        </td>
+                            <td className="px-4 py-2">
+                                <Link
+                                    to={`edit/${item._id}`}
+                                    className="font-medium text-white bg-blue-500 py-1 px-2 rounded cursor-pointer hover:bg-blue-800 "
+                                >
+                                    Edit
+                                </Link>
+                            </td>
+                            <td className="px-4 py-2">
+                                <button
+                                    className="font-medium text-white bg-red-500 py-1 px-2 rounded cursor-pointer hover:bg-red-800 "
+                                    onClick={() => handleDelete(item._id)}
+                                >
+                                    Delete
+                                </button>
+                            </td>
                         </>
                     )}
                 </tr>
@@ -95,4 +95,4 @@ const CrewTable = ({crew, dashboard, handleDelete}) => {
     )
 }
 
-export default CrewTable ;
+export default CrewTable;

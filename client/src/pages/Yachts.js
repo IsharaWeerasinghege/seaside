@@ -15,19 +15,21 @@ const Yachts = () => {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        console.log(location, date, type, search)
-        getYachts();
-    }, [location, date   , type, search]);
-
-
-    async function getYachts() {
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/yacht/filter`, {location, date, type, search});
-            dispatch(setYacht(response.data));
-        } catch (error) {
-            console.log(error);
+        async function getYachts() {
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/yacht/filter`, {
+                    location,
+                    date,
+                    type,
+                    search
+                });
+                dispatch(setYacht(response.data));
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
+        getYachts();
+    }, [location, date, type, search]);
 
     // pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -61,7 +63,7 @@ const Yachts = () => {
                     <label htmlFor="">Check Date :</label>
                     <input type="date"
                            className={'outline-none border-none w-32'}
-                            onChange={(e) => setDate(e.target.value)}
+                           onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
                 <div className={'flex gap-3'}>
@@ -79,8 +81,8 @@ const Yachts = () => {
                 <div className={'flex gap-3'}>
                     <label htmlFor="">Search :</label>
                     <input type="text"
-                            className={'outline-none border-none w-32'}
-                            onChange={(e) => setSearch(e.target.value)}
+                           className={'outline-none border-none w-32'}
+                           onChange={(e) => setSearch(e.target.value)}
                     />
                 </div>
             </div>

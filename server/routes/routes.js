@@ -34,7 +34,7 @@ router.get('/reservation/list/:id', verifyToken, getReservationListByUser);
 /**
  * crew routes
  */
-router.get('/crew/list', verifyToken,  viewCrewList);
+router.get('/crew/list', verifyToken, viewCrewList);
 router.delete('/crew/delete/:id', verifyToken, deleteCrewMember);
 router.put('/crew/update/:id', verifyToken, updateCrewMember);
 router.get('/crew/:id', verifyToken, getCrewMember);
@@ -63,15 +63,10 @@ router.get('/feedback/list', verifyToken, getFeedbackList)
 router.put('/feedback/update/:id', verifyToken, updateFeedbackStatus)
 
 
-
 /**
  * client routes
  */
 router.get('/profile', viewProfile)
-
-
-
-
 
 
 export default router;

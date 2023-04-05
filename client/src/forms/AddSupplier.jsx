@@ -106,10 +106,10 @@ const AddSupplier = () => {
                         <Input icon={<FaCity/>} type="text" name="city" placeholder="City"
                                onChange={(e) => formik.handleChange(e)}/>
                         <Select icon={<FaWarehouse/>} type="text" name="location" placeholder="Warehouse Location"
-                               list={[{value: 'trincomalee', label: 'Trincomalee'}, {
-                                   value: 'galle', label: 'Galle'
-                               }, {value: 'chilaw', label: 'Chilaw'}]}
-                               onChange={(e) => formik.handleChange(e)}/>
+                                list={[{value: 'trincomalee', label: 'Trincomalee'}, {
+                                    value: 'galle', label: 'Galle'
+                                }, {value: 'chilaw', label: 'Chilaw'}]}
+                                onChange={(e) => formik.handleChange(e)}/>
                     </div>
                     <div className={'w-full flex justify-between gap-4'}>
 
@@ -121,8 +121,8 @@ const AddSupplier = () => {
 
                     <div className={'w-full flex justify-between gap-4'}>
                         <div>
-                        {success && <div className={'text-green-500 text-sm float-left'}>{success}</div>}
-                        {error && <div className={'text-red-500 text-sm float-left'}>{error}</div>}
+                            {success && <div className={'text-green-500 text-sm float-left'}>{success}</div>}
+                            {error && <div className={'text-red-500 text-sm float-left'}>{error}</div>}
                         </div>
                         <button
                             type={"submit"}

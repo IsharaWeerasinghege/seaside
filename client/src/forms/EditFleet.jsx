@@ -27,7 +27,6 @@ const validationSchema = Yup.object({
 
 const EditFleet = () => {
     const {id} = useParams();
-    const token = localStorage.getItem('token');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -73,6 +72,7 @@ const EditFleet = () => {
             setError(e.message);
             setSuccess('');
         }
+        clearState();
     };
 
 

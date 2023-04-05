@@ -28,19 +28,19 @@ const Profile = () => {
         }
     }
 
-    async function getReservationByUser () {
-       try {
-           const response = await axios.get(`http://localhost:3001/reservation/list/${localStorage.getItem('user')}`, {
+    async function getReservationByUser() {
+        try {
+            const response = await axios.get(`http://localhost:3001/reservation/list/${localStorage.getItem('user')}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
-           })
+            })
 
-              setReservation(response.data)
+            setReservation(response.data)
 
-       } catch (err) {
-           console.log(err.message())
-       }
+        } catch (err) {
+            console.log(err.message())
+        }
     }
 
 
@@ -100,7 +100,7 @@ const Profile = () => {
 
                 {currentItems && currentItems.length > 0 ? (
                     <div className={'w-full h-auto flex justify-center items-center flex-col py-2'}>
-                        <UserReservationTable tableData={currentItems} />
+                        <UserReservationTable tableData={currentItems}/>
                     </div>
                 ) : (
                     <div className={'w-full h-full flex justify-center items-center flex-col '}>
@@ -110,7 +110,8 @@ const Profile = () => {
                 )}
 
                 <div className={'w-full flex justify-center my-2'}>
-                    <Pagination count={Math.ceil(reservation.length / itemsPerPage)} page={currentPage} onChange={(e, value) => paginate(value)} />
+                    <Pagination count={Math.ceil(reservation.length / itemsPerPage)} page={currentPage}
+                                onChange={(e, value) => paginate(value)}/>
                 </div>
             </div>
         </div>

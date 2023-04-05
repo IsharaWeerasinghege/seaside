@@ -25,11 +25,11 @@ app.use(bodyParser.json());
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
 
 const config = multer.diskStorage({
-   destination: (req, file, cb) => {
-         cb(null, 'public/assets');
-   },
+    destination: (req, file, cb) => {
+        cb(null, 'public/assets');
+    },
     filename: (req, file, cb) => {
-       const fileName = file.fieldname + Date.now().toString() + path.extname(file.originalname);
+        const fileName = file.fieldname + Date.now().toString() + path.extname(file.originalname);
         cb(null, fileName);
 
     }
@@ -44,13 +44,13 @@ mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
         console.log('Database connected successfully');
     })
-    .catch((err) => {
+    .catch(() => {
         console.log('database connection failed. exiting now...');
     });
 
 // routes
 app.use('/', routes);
-app.use('/yacht/create', verifyToken, upload, createYacht );
+app.use('/yacht/create', verifyToken, upload, createYacht);
 
 
 // listen to port

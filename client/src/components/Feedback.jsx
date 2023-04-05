@@ -53,7 +53,7 @@ const Feedback = () => {
                 <Formik
                     initialValues={initialValues}
                     validationSchema={contactValidation}
-                   onSubmit={submitHandler}
+                    onSubmit={submitHandler}
                 >
                     {(formik) => (
                         <Form>
@@ -64,7 +64,7 @@ const Feedback = () => {
                             <Input icon={<BsFillPhoneFill/>} type="tel" name="phone" placeholder="Your Phone"
                                    onChange={(e) => formik.handleChange(e)}/>
                             <Textarea name="message" placeholder="Your Message"
-                                   onChange={(e) => formik.handleChange(e)}/>
+                                      onChange={(e) => formik.handleChange(e)}/>
                             <div className={'my-2'}>
                                 {error && <p className={'text-red-500 text-sm text-left'}>{error}</p>}
                                 {success && <p className={'text-green-500 text-sm text-left'}>{success}</p>}

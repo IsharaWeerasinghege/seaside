@@ -89,7 +89,7 @@ const ReservationTable = ({tableData, handleUpdate, dashboard}) => {
                             <td className="px-6 py-4">
                                 <button
                                     className="font-medium text-white bg-blue-500 py-1 px-2 rounded cursor-pointer hover:bg-blue-800 "
-                                    onClick={() =>handleUpdate(item._id, 'confirmed')}
+                                    onClick={() => handleUpdate(item._id, 'confirmed')}
                                 >
                                     Confirm
                                 </button>

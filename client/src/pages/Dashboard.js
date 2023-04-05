@@ -15,7 +15,7 @@ import SupplierTable from "../tables/SupplierTable";
 
 const Dashboard = () => {
     const [data, setData] = useState([]);
-    const [role, setRole] = useState(localStorage.getItem('role'));
+    const [role] = useState(localStorage.getItem('role'));
 
     useEffect(() => {
         if (role === 'admin_crew') {
@@ -23,7 +23,7 @@ const Dashboard = () => {
         }
 
         if (role === 'admin_rhm') {
-           getReservations();
+            getReservations();
         }
 
         if (role === 'admin_fleet') {
@@ -114,17 +114,18 @@ const Dashboard = () => {
         <div>
             {role === 'admin_crew' && (
                 <>
-                <div className={'flex justify-between gap-5 mb-8'}>
-                    <DashboardItem icon={<FaUsers/>} title={'Total Staff'} count={data.length}/>
-                    <DashboardItem icon={<FaUsers/>} title={'Branch Galle'}
-                                   count={data.filter(item => item.branch === 'galle').length}/>
-                    <DashboardItem icon={<FaUsers/>} title={'Total Trincomalee'}
-                                   count={data.filter(item => item.branch === 'trincomalee').length}/>
-                    <DashboardItem icon={<FaUsers/>} title={'Total Chilaw'} count={data.filter(item => item.branch === 'chilaw').length}/>
-                </div>
+                    <div className={'flex justify-between gap-5 mb-8'}>
+                        <DashboardItem icon={<FaUsers/>} title={'Total Staff'} count={data.length}/>
+                        <DashboardItem icon={<FaUsers/>} title={'Branch Galle'}
+                                       count={data.filter(item => item.branch === 'galle').length}/>
+                        <DashboardItem icon={<FaUsers/>} title={'Total Trincomalee'}
+                                       count={data.filter(item => item.branch === 'trincomalee').length}/>
+                        <DashboardItem icon={<FaUsers/>} title={'Total Chilaw'}
+                                       count={data.filter(item => item.branch === 'chilaw').length}/>
+                    </div>
                     <div className="bg-white shadow-lg p-4 rounded">
                         <h2 className={'font-semibold text-lg mb-4'}>Crew Members</h2>
-                            <CrewTable crew={data.slice(0, 4)} dashboard/>
+                        <CrewTable crew={data.slice(0, 4)} dashboard/>
                     </div>
 
                 </>
@@ -138,11 +139,12 @@ const Dashboard = () => {
                                        count={data.filter(item => item.location === 'galle').length}/>
                         <DashboardItem icon={<FaUsers/>} title={'Total Trincomalee'}
                                        count={data.filter(item => item.location === 'trincomalee').length}/>
-                        <DashboardItem icon={<FaUsers/>} title={'Total Chilaw'} count={data.filter(item => item.location === 'chilaw').length}/>
+                        <DashboardItem icon={<FaUsers/>} title={'Total Chilaw'}
+                                       count={data.filter(item => item.location === 'chilaw').length}/>
                     </div>
                     <div className="bg-white shadow-lg p-4 rounded">
                         <h2 className={'font-semibold text-lg mb-4'}>Crew Members</h2>
-                        <SupplierTable supplier={data.slice(0,6)}  dashboard/>
+                        <SupplierTable supplier={data.slice(0, 6)} dashboard/>
                     </div>
 
                 </>
@@ -156,11 +158,13 @@ const Dashboard = () => {
                                        count={data.filter(item => item.status === 'pending').length}/>
                         <DashboardItem icon={<FaBookmark/>} title={'Confirmed'}
                                        count={data.filter(item => item.status === 'confirmed').length}/>
-                        <DashboardItem icon={<FaBookmark/>} title={'Rejected'} count={data.filter(item => item.status === 'rejected').length}/>
+                        <DashboardItem icon={<FaBookmark/>} title={'Rejected'}
+                                       count={data.filter(item => item.status === 'rejected').length}/>
                     </div>
                     <div className="bg-white shadow-lg p-4 rounded">
                         <h2 className={'font-semibold text-lg mb-4'}>Pending Reservation</h2>
-                       <ReservationTable tableData={data.filter(item => item.status === 'pending').slice(0, 7)} dashboard/>
+                        <ReservationTable tableData={data.filter(item => item.status === 'pending').slice(0, 7)}
+                                          dashboard/>
                     </div>
 
                 </>
@@ -174,11 +178,12 @@ const Dashboard = () => {
                                        count={data.filter(item => item.type === 'boat').length}/>
                         <DashboardItem icon={<GiShoonerSailboat/>} title={'Ships'}
                                        count={data.filter(item => item.type === 'ship').length}/>
-                        <DashboardItem icon={<RiSailboatFill/>} title={'Catamaran'} count={data.filter(item => item.type === 'catamaran').length}/>
+                        <DashboardItem icon={<RiSailboatFill/>} title={'Catamaran'}
+                                       count={data.filter(item => item.type === 'catamaran').length}/>
                     </div>
                     <div className="bg-white shadow-lg p-4 rounded">
                         <h2 className={'font-semibold text-lg mb-4'}>Fleet Management</h2>
-                        <YachtTable  yachts={data.slice(0, 5)} dashboard/>
+                        <YachtTable yachts={data.slice(0, 5)} dashboard/>
                     </div>
 
                 </>
@@ -192,11 +197,13 @@ const Dashboard = () => {
                                        count={data.filter(item => item.status === 'pending').length}/>
                         <DashboardItem icon={<MdFeed/>} title={'Resolved Feedback'}
                                        count={data.filter(item => item.status === 'resolved').length}/>
-                        <DashboardItem icon={<MdFeed/>} title={'Rejected Feedback'} count={data.filter(item => item.status === 'rejected').length}/>
+                        <DashboardItem icon={<MdFeed/>} title={'Rejected Feedback'}
+                                       count={data.filter(item => item.status === 'rejected').length}/>
                     </div>
                     <div className="bg-white shadow-lg p-4 rounded">
                         <h2 className={'font-semibold text-lg mb-4'}>Pending Feedback</h2>
-                        <FeedbackTable tableData={data.filter(item => item.status === 'pending').slice(0, 5)} dashboard/>
+                        <FeedbackTable tableData={data.filter(item => item.status === 'pending').slice(0, 5)}
+                                       dashboard/>
                     </div>
 
                 </>

@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 import React, {useState} from 'react';
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
@@ -43,7 +45,7 @@ const AddFleet = () => {
             formData.append('type', values.type);
             formData.append('description', values.description);
 
-            const response = await axios.post('http://localhost:3001/yacht/create', formData, {
+            await axios.post('http://localhost:3001/yacht/create', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data',
                 },
@@ -55,6 +57,7 @@ const AddFleet = () => {
             setError(e.message);
             setSuccess('');
         }
+        clearState()
     };
 
 

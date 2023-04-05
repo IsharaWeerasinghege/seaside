@@ -5,14 +5,15 @@ import {FaUser} from "react-icons/fa";
 
 
 const Header = () => {
-    const [user, setUser] = useState(localStorage.getItem('name'));
-    const [role, setRole] = useState(localStorage.getItem('role'));
+    const [user] = useState(localStorage.getItem('name'));
+    const [role] = useState(localStorage.getItem('role'));
     const [isOpen, setIsOpen] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         localStorage.removeItem('role');
+        localStorage.removeItem('user');
         window.location.href = '/';
     }
 
@@ -26,14 +27,15 @@ const Header = () => {
 
                 <ul className={'flex items-center gap-6'}>
 
-                        <li>
-                            <Link to={'/'} className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
-                                Home
-                            </Link>
-                        </li>
+                    <li>
+                        <Link to={'/'} className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
+                            Home
+                        </Link>
+                    </li>
 
                     <li>
-                        <Link to={'/yachts'} className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
+                        <Link to={'/yachts'}
+                              className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
                             Rent Yacht
                         </Link>
                     </li>
@@ -45,7 +47,8 @@ const Header = () => {
                     </li>
 
                     <li>
-                        <a href={'/#contact'} className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
+                        <a href={'/#contact'}
+                           className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
                             contact
                         </a>
                     </li>
@@ -54,21 +57,29 @@ const Header = () => {
 
                 {user ? (
                     <div className={'relative'}>
-                        <div className={'flex items-center gap-2 cursor-pointer'} onClick={() => setIsOpen((prevState) => !prevState)}>
+                        <div className={'flex items-center gap-2 cursor-pointer'}
+                             onClick={() => setIsOpen((prevState) => !prevState)}>
                             <FaUser/>
                             {user}
                         </div>
                         {isOpen && (
-                            <div className={'absolute top-10 right-0 bg-white shadow-lg rounded py-3 px-4 w-44 text-center'}>
+                            <div
+                                className={'absolute top-10 right-0 bg-white shadow-lg rounded py-3 px-4 w-44 text-center'}>
                                 {role !== 'user' && (
-                                    <Link to={'/admin'} className={'block text-slate-900 hover:text-slate-700 text-[15px] font-semibold border-b py-2'} onClick={() => setIsOpen(false)}>
+                                    <Link to={'/admin'}
+                                          className={'block text-slate-900 hover:text-slate-700 text-[15px] font-semibold border-b py-2'}
+                                          onClick={() => setIsOpen(false)}>
                                         Dashboard
                                     </Link>
                                 )}
-                                <Link to={'/profile'} className={'block text-slate-900 hover:text-slate-700 text-[15px] font-semibold border-b py-2'} onClick={() => setIsOpen(false)}>
+                                <Link to={'/profile'}
+                                      className={'block text-slate-900 hover:text-slate-700 text-[15px] font-semibold border-b py-2'}
+                                      onClick={() => setIsOpen(false)}>
                                     Profile
                                 </Link>
-                                <div to={'/logout'} className={'block text-slate-900 hover:text-slate-700 text-[15px] font-semibold py-2 cursor-pointer'} onClick={() => handleLogout()}>
+                                <div
+                                    className={'block text-slate-900 hover:text-slate-700 text-[15px] font-semibold py-2 cursor-pointer'}
+                                    onClick={() => handleLogout()}>
                                     Logout
                                 </div>
                             </div>

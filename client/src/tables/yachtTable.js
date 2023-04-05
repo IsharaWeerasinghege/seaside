@@ -30,7 +30,7 @@ const YachtTable = ({yachts, deleteYacht, dashboard}) => {
                 <th scope="col" className="px-6 py-3">
                     Warehouse
                 </th>
-                { !dashboard && (
+                {!dashboard && (
                     <>
                         <th scope="col" className="px-6 py-3">
                             Edit

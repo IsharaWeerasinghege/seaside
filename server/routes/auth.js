@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 
 export const signUp = async (req, res) => {
     try {
-        const {name, email, password, phone, address, role, branch, nic, city, category, location } = req.body;
+        const {name, email, password, phone, address, role, branch, nic, city, category, location} = req.body;
 
         if (!name || !email || !password || !phone || !address) {
             return res.status(400).json({message: 'Please enter all fields'});
@@ -25,8 +25,20 @@ export const signUp = async (req, res) => {
         }
 
         const passwordHash = await bcrypt.hash(password, 12);
-        const newUser = new User({name, email, password: passwordHash, phone, address, role, branch, nic, city, category, location });
-        const userAdded = await newUser.save();
+        const newUser = new User({
+            name,
+            email,
+            password: passwordHash,
+            phone,
+            address,
+            role,
+            branch,
+            nic,
+            city,
+            category,
+            location
+        });
+        await newUser.save();
 
         res.status(201).json({message: 'User created successfully'});
 
@@ -43,25 +55,25 @@ export const signUp = async (req, res) => {
 
 export const signIn = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const {email, password} = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({ message: 'Please enter all fields' });
+            return res.status(400).json({message: 'Please enter all fields'});
         }
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({email});
 
         if (!user) {
-            return res.status(400).json({ message: 'User not found' });
+            return res.status(400).json({message: 'User not found'});
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({message: 'Invalid credentials'});
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
 
         const loggedUser = {
             token,
@@ -70,10 +82,10 @@ export const signIn = async (req, res) => {
             role: user.role,
         };
 
-        res.status(200).json({ user: loggedUser });
+        res.status(200).json({user: loggedUser});
 
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({message: 'Server Error'});
     }
 };

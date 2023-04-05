@@ -6,37 +6,42 @@ import ReservationTable from "../tables/ReservationTable";
 import {Pagination} from "@material-ui/lab";
 
 const Reservation = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch();
     const {reservations} = useSelector(state => state.reservation);
 
     useEffect(() => {
-        getReservations();
-        async function getReservations() {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/reservation/list`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                dispatch(setReservations(response.data));
-            } catch (error) {
-                console.log(error);
+        if(!isLoaded){
+            getReservations();
+
+            async function getReservations() {
+                try {
+                    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/reservation/list`, {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+                    });
+                    dispatch(setReservations(response.data));
+                    setIsLoaded(true);
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
 
-    }, [handleUpdate])
+    }, [isLoaded, handleUpdate])
 
-    async function handleUpdate (id, type) {
-        console.log(id, type)
+    async function handleUpdate(id, type) {
         try {
-                await axios.put(`http://localhost:3001/reservation/update/${id}`, {
-                    status: type
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-        }  catch (error) {
+            await axios.put(`http://localhost:3001/reservation/update/${id}`, {
+                status: type
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setIsLoaded(false)
+        } catch (error) {
             console.log(error);
         }
     }
@@ -53,16 +58,16 @@ const Reservation = () => {
 
     }
 
-  return (
-      <div className="relative shadow-lg sm:rounded-lg bg-white p-4">
-          <div className={'overflow-x-auto'}>
-              <ReservationTable tableData={paginatedReservations} handleUpdate={handleUpdate} />
-          </div>
-          <div className={'mt-2 flex justify-center'}>
-              <Pagination   count={Math.ceil(reservations.length / itemsPerPage)} page={page} onChange={paginate} />
-          </div>
-      </div>
-  )
+    return (
+        <div className="relative shadow-lg sm:rounded-lg bg-white p-4">
+            <div className={'overflow-x-auto'}>
+                <ReservationTable tableData={paginatedReservations} handleUpdate={handleUpdate}/>
+            </div>
+            <div className={'mt-2 flex justify-center'}>
+                <Pagination count={Math.ceil(reservations.length / itemsPerPage)} page={page} onChange={paginate}/>
+            </div>
+        </div>
+    )
 }
 
 export default Reservation;

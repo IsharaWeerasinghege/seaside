@@ -25,7 +25,7 @@ const Stats = () => {
 
             <div className={'w-1/5 bg-neutral-900 rounded-lg flex flex-row items-center py-2.5 px-5 gap-4'}>
                 <div className={'w-9 h-9 bg-white rounded-full grid place-items-center'}>
-                    <IoMdBoat className={'text-xl'} />
+                    <IoMdBoat className={'text-xl'}/>
                 </div>
                 <div>
                     <h1 className={'text-neutral-50 capitalize text-sm'}>Yacht Rented</h1>
@@ -35,7 +35,7 @@ const Stats = () => {
 
             <div className={'w-1/5 bg-neutral-900 rounded-lg flex flex-row items-center py-2.5 px-5 gap-4'}>
                 <div className={'w-9 h-9 bg-white rounded-full grid place-items-center'}>
-                    <FaUsers className={'text-xl'} />
+                    <FaUsers className={'text-xl'}/>
                 </div>
                 <div>
                     <h1 className={'text-neutral-50 capitalize text-sm'}>Happy Clients</h1>
@@ -45,7 +45,7 @@ const Stats = () => {
 
             <div className={'w-1/5 bg-neutral-900 rounded-lg flex flex-row items-center py-2.5 px-5 gap-4'}>
                 <div className={'w-9 h-9 bg-white rounded-full grid place-items-center'}>
-                    <RiSailboatFill className={'text-xl'} />
+                    <RiSailboatFill className={'text-xl'}/>
                 </div>
                 <div>
                     <h1 className={'text-neutral-50 capitalize text-sm'}>Available Yachts</h1>

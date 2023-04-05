@@ -28,7 +28,7 @@ const feedbackSchema = new mongoose.Schema({
         enum: ['pending', 'resolved', 'rejected'],
         default: 'pending'
     }
-}, { timestamps: true });
+}, {timestamps: true});
 
 const Feedback = mongoose.models.Feedback || mongoose.model('Feedback', feedbackSchema);
 

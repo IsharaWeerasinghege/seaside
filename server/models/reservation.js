@@ -26,10 +26,10 @@ const reservationSchema = new mongoose.Schema({
         enum: ['pending', 'confirmed', 'rejected'],
         default: 'pending'
     }
-}, { timestamps: true });
+}, {timestamps: true});
 
 
-reservationSchema.index({ yacht: 1, date: 1 }, { unique: true });
+reservationSchema.index({yacht: 1, date: 1}, {unique: true});
 
 const Reservation = mongoose.models.Reservarion || mongoose.model('Reservation', reservationSchema);
 

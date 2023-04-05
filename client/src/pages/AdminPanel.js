@@ -26,7 +26,8 @@ const AdminPanel = () => {
                    className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
                    aria-label="Sidebar">
                 <div className="h-full px-3 py-4 overflow-y-auto bg-white">
-                    <Link to={'/'} className={"flex flex-row items-center justify-center gap-2 text-2xl font-semibold mb-2 text-slate-900 border-b text-center w-full"}>
+                    <Link to={'/'}
+                          className={"flex flex-row items-center justify-center gap-2 text-2xl font-semibold mb-2 text-slate-900 border-b text-center w-full"}>
                         <GiSailboat/>
                         <h1>Seaside Yachts</h1>
                     </Link>
@@ -35,7 +36,7 @@ const AdminPanel = () => {
                             <li key={index}>
                                 <NavLink
                                     to={`/admin${link.url}`}
-                                    style={({ isActive }) => ({background: isActive ? '#eee' : 'white' })}
+                                    style={({isActive}) => ({background: isActive ? '#eee' : 'white'})}
                                     className={'block px-3 py-2 text-sm font-medium text-gray-900 rounded-md hover:bg-gray-100'}>
                                     {link.name}
                                 </NavLink>
@@ -49,13 +50,13 @@ const AdminPanel = () => {
             <div className="p-4 sm:ml-64">
                 <div className="p-4 ">
                     <Routes>
-                        <Route path={'/'} element={<Dashboard />}/>
-                        <Route path={'reservation'} element={<Reservation />} />
-                        <Route path={'party'} element={<Party />} />
-                        <Route path={'fleet/*'} element={<Fleet />} />
-                        <Route path={'feedback/*'} element={<Feedback />} />
-                        <Route path={'crew/*'} element={<Crew />} />
-                        <Route path={'suppliers/*'} element={<Suppliers />} />
+                        <Route path={'/'} element={<Dashboard/>}/>
+                        <Route path={'reservation'} element={<Reservation/>}/>
+                        <Route path={'party'} element={<Party/>}/>
+                        <Route path={'fleet/*'} element={<Fleet/>}/>
+                        <Route path={'feedback/*'} element={<Feedback/>}/>
+                        <Route path={'crew/*'} element={<Crew/>}/>
+                        <Route path={'suppliers/*'} element={<Suppliers/>}/>
                     </Routes>
                 </div>
             </div>

@@ -5,7 +5,16 @@ import User from "../models/user.js";
 
 export const viewCrewList = async (req, res) => {
     try {
-        const crewList = await User.find({role: {$nin: ['user', 'supplier']}}, {name: 1, phone: 1, _id: 1, address: 1, email: 1, branch: 1, role: 1, nic: 1});
+        const crewList = await User.find({role: {$nin: ['user', 'supplier']}}, {
+            name: 1,
+            phone: 1,
+            _id: 1,
+            address: 1,
+            email: 1,
+            branch: 1,
+            role: 1,
+            nic: 1
+        });
         res.status(200).json(crewList);
     } catch (error) {
         res.status(404).json({message: error.message});
@@ -60,7 +69,7 @@ export const getCrewMember = async (req, res) => {
     try {
         const crewMember = await User.findById(id);
         if (!crewMember) {
-            throw new Error('crew member not found');
+            return res.status(404).json({ message: 'Crew member not found' });
         }
         res.status(200).json(crewMember);
     } catch (error) {

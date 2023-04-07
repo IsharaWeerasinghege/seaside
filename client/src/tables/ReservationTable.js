@@ -1,20 +1,22 @@
 import React from 'react';
 
-const ReservationTable = ({tableData, handleUpdate, dashboard}) => {
+const ReservationTable = ({tableData, handleUpdate, dashboard, pack}) => {
     return (
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead
                 className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3">
-                    Yacht
+                    {pack ? 'Package' : 'Yacht'}
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Date
                 </th>
-                <th scope="col" className="px-6 py-3">
-                    Branch
-                </th>
+                {!pack && (
+                    <th scope="col" className="px-6 py-3">
+                        Branch
+                    </th>
+                )}
                 <th scope="col" className="px-6 py-3">
                     Name
                 </th>
@@ -43,14 +45,16 @@ const ReservationTable = ({tableData, handleUpdate, dashboard}) => {
             {tableData?.map((item, index) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <td className="px-6 py-4">
-                        {item?.yacht?.name}
+                        {pack ? item?.package?.name : item?.yacht?.name}
                     </td>
                     <td className="px-6 py-4 capitalize">
                         {item?.date.slice(0, 10)}
                     </td>
-                    <td className="px-6 py-4 capitalize">
-                        {item?.yacht?.location}
-                    </td>
+                    {!pack && (
+                        <td className="px-6 py-4 capitalize">
+                            {item?.yacht?.location}
+                        </td>
+                    )}
                     <td className="px-6 py-4">
                         {item?.user?.name}
                     </td>

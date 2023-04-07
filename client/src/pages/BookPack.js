@@ -1,29 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {FaCalendarDay, FaUser, FaUsers} from "react-icons/fa";
+import {FaCalendarDay, FaUser, FaUsers, FaWarehouse} from "react-icons/fa";
 import {Link, useParams} from "react-router-dom";
 import * as Yup from "yup";
 import {Form, Formik} from "formik";
 import {Input} from "../elements";
 import {ImBook} from "react-icons/im";
 import axios from "axios";
+import Select from "../elements/Select";
 
 const initialValues = {
-    checkIn: '',
+    date: '',
     guests: '',
+    location: '',
 };
 
 const Book = () => {
     const {id} = useParams()
     const [item, setItem] = useState('');
     const [user] = useState(localStorage.getItem('user'));
-    const [booking, setBooking] = useState(initialValues);
-    const {checkIn, guests} = booking;
     const [errors, setErrors] = useState('');
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
         async function getData() {
-            await axios.get(`${process.env.REACT_APP_BASE_URL}/yacht/${id}`)
+            await axios.get(`${process.env.REACT_APP_BASE_URL}/package/${id}`)
                 .then(res => {
                     setItem(res.data)
                 }).catch(err => {
@@ -35,33 +35,26 @@ const Book = () => {
     }, [])
 
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setBooking({...booking, [name]: value})
-    }
-
     const bookingValidation = Yup.object().shape({
-        checkIn: Yup.date().required('Check in date is required'),
+        date: Yup.date().required('Check in date is required'),
         guests: Yup.number().required('Guests is required'),
+        location: Yup.string().required('Location is required'),
     });
 
-    const submitHandler = async () => {
-        try {
-            const response = await axios.post('http://localhost:3001/reservation/create', {
-                ...booking,
-                yacht: id,
-                user: user
-            }, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            setSuccess(response.data.message);
-            setErrors('');
-        } catch (error) {
-            setErrors(error.response.data.message);
-            setSuccess('');
-        }
+    const submitHandler = async (values) => {
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/booking/create`, {
+            ...values,
+            packageId: id,
+            user: user
+        },{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+            setSuccess(res.data.message)
+        }).catch(err => {
+            setErrors(err.response.data.message)
+        })
 
         setTimeout(() => {
             setSuccess('');
@@ -76,13 +69,24 @@ const Book = () => {
                 <h1 className={'text-center font-bold text-3xl mb-8'}>Rent Your Yacht</h1>
                 <div className={'flex flex-col md:flex-row gap-8'}>
                     <div className={'w-full md:w-1/2 px-4 border-r'}>
-                        <img src={`http://localhost:3001/assets/${item.image}`} alt={item.name}
-                             className={'w-full h-72 rounded shadow-md mb-4'}/>
+                        <img src="https://travelsaga.com/wp-content/uploads/2022/07/new-years-eve-yacht-party-dubai.jpg"
+                             alt=""/>
                         <div className={'bg-gray-100 rounded px-2 py-2 font-sans'}>
                             <h4>Name : {item.name}</h4>
-                            <h4>Price : from {item.price} per day </h4>
-                            <h4>Guest : {item.capacity}</h4>
-                            <h4>Location : {item.location}</h4>
+                            <h4>Price : $ {item.price} </h4>
+                            <h4>Duration : {item.duration} Day</h4>
+                            <h4 className={'flex gap-4'}>Features :
+                                <ul>
+                                    {item.features && item.features.map((feature) => (
+                                        <li>{feature}</li>
+                                    ))}
+                                </ul>
+                            </h4>
+                            <h4>Description:
+                                <p>
+                                    {item.description}
+                                </p>
+                            </h4>
                         </div>
                     </div>
 
@@ -92,24 +96,24 @@ const Book = () => {
                                 <h1 className={'text-center font-semibold text-2xl mb-8'}>Book Your Yacht</h1>
                                 <Formik
                                     enableReinitialize
-                                    initialValues={{
-                                        checkIn,
-                                        guests,
-                                    }
-                                    }
+                                    initialValues={initialValues}
                                     validationSchema={bookingValidation}
-                                    onSubmit={(e) => {
-                                        submitHandler()
-                                    }
-                                    }
+                                    onSubmit={submitHandler}
                                 >
                                     {(formik) => (
                                         <Form className={'text-center'}>
-                                            <Input icon={<FaCalendarDay/>} type="date" name="checkIn"
+                                            <Input icon={<FaCalendarDay/>} type="date" name="date"
                                                    placeholder="Check in date"
-                                                   onChange={handleChange}/>
+                                            onChange={(e) => formik.handleChange(e)}
+                                            />
+                                            <Select icon={<FaWarehouse/>} type="text" name="location" placeholder="Location"
+                                                    list={[{value: 'trincomalee', label: 'Trincomalee'}, {
+                                                        value: 'galle', label: 'Galle'
+                                                    }, {value: 'chilaw', label: 'Chilaw'}]}
+                                                    onChange={(e) => formik.handleChange(e)}/>
                                             <Input icon={<FaUsers/>} type="number" name="guests" placeholder="Guests"
-                                                   onChange={handleChange}/>
+                                                   onChange={(e) => formik.handleChange(e)}
+                                            />
                                             <button
                                                 type={"submit"}
                                                 name={'send'}

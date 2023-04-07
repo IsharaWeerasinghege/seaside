@@ -6,12 +6,15 @@ import {verifyToken} from "../middleware/auth.js";
 import {deleteCrewMember, getCrewMember, updateCrewMember, viewCrewList} from "./crew.js";
 import {viewSupplier} from "./supplier.js";
 import {
-    createReservation,
+    createBooking,
+    createReservation, getBookingList,
     getReservationList,
-    getReservationListByUser,
+    getReservationListByUser, updateBookingStatus,
     updateReservationStatus
 } from "./reservation.js";
 import {createFeedback, getFeedbackList, updateFeedbackStatus} from "./feedback.js";
+import {createPackage, deletePackage, getPackages, readPackage} from "./package.js";
+import {addInventoryItems, getInventory, getInventoryById} from "./inventory.js";
 
 const router = express.Router();
 
@@ -29,6 +32,11 @@ router.post('/reservation/create', verifyToken, createReservation)
 router.get('/reservation/list', verifyToken, getReservationList)
 router.put('/reservation/update/:id', verifyToken, updateReservationStatus)
 router.get('/reservation/list/:id', verifyToken, getReservationListByUser);
+
+// package routes
+router.post('/booking/create', verifyToken, createBooking);
+router.get('/booking/list', verifyToken, getBookingList)
+router.put('/booking/update/:id', verifyToken, updateBookingStatus)
 
 
 /**
@@ -67,6 +75,21 @@ router.put('/feedback/update/:id', verifyToken, updateFeedbackStatus)
  * client routes
  */
 router.get('/profile', viewProfile)
+
+/**
+ * package routes
+ */
+router.post('/package/create', verifyToken, createPackage);
+router.get('/package/list', getPackages);
+router.get('/package/:id', readPackage);
+router.delete('/package/delete/:id', verifyToken, deletePackage);
+
+/**
+ * inventory routes
+ */
+router.get('/inventory/list', verifyToken, getInventory);
+router.get('/inventory/list/:id', verifyToken, getInventoryById);
+router.post('/inventory/update', verifyToken, addInventoryItems);
 
 
 export default router;

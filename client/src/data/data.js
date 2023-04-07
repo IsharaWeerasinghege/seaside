@@ -95,6 +95,8 @@ export const sidebarLinks = [
     },
     {name: 'Boat Reservation', url: '/reservation', role: ['admin_rhm', 'owner']},
     {name: 'Onboard Party', url: '/party', role: ['admin_party', 'owner']},
+    {name: 'Party Packages', url: '/packages', role: ['admin_party', 'owner']},
+    {name: 'Create Package', url: '/package/create', role: ['admin_party', 'owner']},
     {name: 'Fleet Management', url: '/fleet', role: ['admin_fleet', 'owner']},
     {name: 'Add Fleet', url: '/fleet/add', role: ['admin_fleet', 'owner']},
     {name: 'Crew Management', url: '/crew', role: ['admin_crew', 'owner']},
@@ -102,5 +104,37 @@ export const sidebarLinks = [
     {name: 'Suppliers', url: '/suppliers', role: ['admin_shm', 'owner']},
     {name: 'Add Suppliers', url: '/suppliers/add', role: ['admin_shm', 'owner']},
     {name: 'User Feedback', url: '/feedback', role: ['admin_feed', 'owner']},
+    {name: 'Inventory', url: '/inventory', role: ['admin_invent', 'owner']},
+]
+
+
+const inventory  = [
+    {
+        id: '1',
+        name: 'amara',
+        items: [
+            {id: 1, food: 100, water: 100, fuel: 10},
+            {id: 2, food: 80, water: -50, fuel: -5},
+            {id: 3, food: -50, water: 50, fuel: 10},
+        ]
+    },
+    {
+        id: '2',
+        name: 'hiru',
+        items: [
+            {id: 1, food: 100, water: 100, fuel: 10},
+            {id: 2, food: 80, water: -50, fuel: -5},
+            {id: 3, food: -50, water: 50, fuel: 10},
+        ]
+    },
+    {
+        id: '3',
+        name: 'gajan',
+        items: [
+            {id: 1, food: 100, water: 100, fuel: 10},
+            {id: 2, food: 80, water: -50, fuel: -5},
+            {id: 3, food: -50, water: 50, fuel: 10},
+        ]
+    }
 ]
 

@@ -11,11 +11,13 @@ import YachtTable from "../tables/yachtTable";
 import {MdFeed} from "react-icons/md";
 import FeedbackTable from "../tables/FeedbackTable";
 import SupplierTable from "../tables/SupplierTable";
+import {useNavigate} from "react-router-dom";
 
 
 const Dashboard = () => {
     const [data, setData] = useState([]);
     const [role] = useState(localStorage.getItem('role'));
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (role === 'admin_crew') {
@@ -38,11 +40,34 @@ const Dashboard = () => {
             getSuppliers();
         }
 
+        if (role === 'admin_invent') {
+            navigate('/admin/inventory');
+        }
+
+        if (role === 'admin_party') {
+            getBooking();
+        }
+
     }, []);
+
 
     async function getFeedbacks() {
         try {
             const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/feedback/list`, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+
+            setData(response.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function getBooking() {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/booking/list`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
@@ -204,6 +229,26 @@ const Dashboard = () => {
                         <h2 className={'font-semibold text-lg mb-4'}>Pending Feedback</h2>
                         <FeedbackTable tableData={data.filter(item => item.status === 'pending').slice(0, 5)}
                                        dashboard/>
+                    </div>
+
+                </>
+            )}
+
+            {role === 'admin_party' && (
+                <>
+                    <div className={'flex justify-between gap-5 mb-8'}>
+                        <DashboardItem icon={<FaBook/>} title={'Total Reservation'} count={data.length}/>
+                        <DashboardItem icon={<FaBookmark/>} title={'Pending'}
+                                       count={data.filter(item => item.status === 'pending').length}/>
+                        <DashboardItem icon={<FaBookmark/>} title={'Confirmed'}
+                                       count={data.filter(item => item.status === 'confirmed').length}/>
+                        <DashboardItem icon={<FaBookmark/>} title={'Rejected'}
+                                       count={data.filter(item => item.status === 'rejected').length}/>
+                    </div>
+                    <div className="bg-white shadow-lg p-4 rounded">
+                        <h2 className={'font-semibold text-lg mb-4'}>Pending Reservation</h2>
+                        <ReservationTable pack tableData={data.filter(item => item.status === 'pending').slice(0, 7)}
+                                          dashboard/>
                     </div>
 
                 </>

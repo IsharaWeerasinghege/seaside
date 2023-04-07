@@ -9,6 +9,10 @@ import Fleet from "./Fleet";
 import Crew from "./Crew";
 import Suppliers from "./Suppliers";
 import Feedback from "./Feedback";
+import Packages from "./Packages";
+import CreatePack from "./CreatePack";
+import Inventory from "./Inventory";
+import UpdateInventory from "./UpdateInventory";
 
 const AdminPanel = () => {
     const [links, setLinks] = React.useState([]);
@@ -57,6 +61,10 @@ const AdminPanel = () => {
                         <Route path={'feedback/*'} element={<Feedback/>}/>
                         <Route path={'crew/*'} element={<Crew/>}/>
                         <Route path={'suppliers/*'} element={<Suppliers/>}/>
+                        <Route path={'packages'} element={<Packages />}/>
+                        <Route path={'package/create'} element={<CreatePack />}/>
+                        <Route path={'inventory'} element={<Inventory />}/>
+                        <Route path={'inventory/:id'} element={<UpdateInventory />}/>
                     </Routes>
                 </div>
             </div>

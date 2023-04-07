@@ -89,7 +89,8 @@ const AddMember = () => {
                                 {value: 'admin_feed', label: 'Feedback Manager'},
                                 {value: 'staff', label: 'Staff'},
                                 {value: 'admin_crew', label: 'Crew Manager'},
-                                {value: 'admin_shm', label: 'Supplier Manager'}
+                                {value: 'admin_shm', label: 'Supplier Manager'},
+                                {value: 'admin_invent', label: 'Inventory Manager'},
                             ]}
                             placeholder="Role"
                             onChange={(e) => formik.handleChange(e)}/>

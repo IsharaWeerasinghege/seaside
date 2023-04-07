@@ -29,8 +29,11 @@ const yachtSchema = new mongoose.Schema({
     },
     image: {
         type: String,
+    },
+    items: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'InventoryItem'
     }
-
 });
 
 const Yacht = mongoose.models.Yacht || mongoose.model('Yacht', yachtSchema);

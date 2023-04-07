@@ -115,7 +115,7 @@ const Profile = () => {
             <div className={'flex-1 bg-white p-4 rounded-lg shadow-lg'}>
                 <h1 className={'text-xl font-bold mb-2'}>Orders</h1>
 
-                {reservation.length > 0 || booking && booking.length > 0 ? (
+                {reservation || booking ? (
                     <div className={'w-full h-auto flex justify-center items-center flex-col py-2'}>
                         {reservation.length > 0 ? (
                             <div

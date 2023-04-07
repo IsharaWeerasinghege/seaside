@@ -160,3 +160,21 @@ export const updateBookingStatus = async (req, res) => {
         console.log(error.message)
     }
 }
+
+/**
+ * get booking list by user
+ */
+export const getBookingListByUser = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const reservations = await partyReservation.find({user: id}).populate({
+            path: 'package',
+            select: 'name'
+        }).sort({date: -1}).limit(10);
+
+        res.status(200).json(reservations);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+        console.log(error.message)
+    }
+}

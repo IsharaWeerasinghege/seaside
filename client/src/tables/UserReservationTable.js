@@ -1,13 +1,13 @@
 import React from 'react';
 
-const ReservationTable = ({tableData}) => {
+const ReservationTable = ({tableData, pack}) => {
     return (
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead
                 className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3 text-center">
-                    Yacht
+                    {pack ? 'Package' : 'Yacht'}
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
                     Date
@@ -25,13 +25,13 @@ const ReservationTable = ({tableData}) => {
                 <tr key={index} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <td
                         className="px-6 py-4 text-center">
-                        {item?.yacht?.name}
+                        {pack ? item?.package?.name : item?.yacht?.name}
                     </td>
                     <td className="px-6 py-4 capitalize text-center">
                         {item?.date.slice(0, 10)}
                     </td>
                     <td className="px-6 py-4 capitalize text-center">
-                        {item?.yacht?.location}
+                        {pack ? item?.location : item?.yacht?.location}
                     </td>
                     <td className={'px-6 py-4 text-center'}>
                         {item?.status === 'pending' ? (

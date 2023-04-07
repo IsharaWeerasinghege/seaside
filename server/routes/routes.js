@@ -7,7 +7,7 @@ import {deleteCrewMember, getCrewMember, updateCrewMember, viewCrewList} from ".
 import {viewSupplier} from "./supplier.js";
 import {
     createBooking,
-    createReservation, getBookingList,
+    createReservation, getBookingList, getBookingListByUser,
     getReservationList,
     getReservationListByUser, updateBookingStatus,
     updateReservationStatus
@@ -37,6 +37,7 @@ router.get('/reservation/list/:id', verifyToken, getReservationListByUser);
 router.post('/booking/create', verifyToken, createBooking);
 router.get('/booking/list', verifyToken, getBookingList)
 router.put('/booking/update/:id', verifyToken, updateBookingStatus)
+router.get('/booking/list/:id', verifyToken, getBookingListByUser);
 
 
 /**

@@ -28,64 +28,6 @@ export const contactInfo = [
 
 ]
 
-export const packages = [
-    {id: '1', name: 'Silver Package', price: 'Rs. 100,000', people: '50', duration: '1 day'},
-    {id: '2', name: 'Gold Package', price: 'Rs. 200,000', people: '100', duration: '2 days'},
-    {id: '3', name: 'VIP Package', price: 'Rs. 300,000', people: '150', duration: '3 days'}
-];
-
-export const yachts = [
-    {
-        id: '1',
-        name: 'Westport 112',
-        price: '500',
-        guests: '10',
-        location: 'galle',
-        booking: [],
-        type: 'Yacht',
-        image: 'https://cdn.northropandjohnson.com/uploads/westport-112-yacht-sales-34M-Profile.jpg'
-    },
-    {
-        id: '2',
-        name: 'Project 406',
-        price: '500',
-        guests: '50',
-        location: 'chilaw',
-        booking: [],
-        type: 'Yacht',
-        image: 'https://cdn.boatinternational.com/convert/files/2023/02/56e67ae0-b752-11ed-9e3a-eff3d1f75b1e-royal%20huisman.jpg/r%5Bwidth%5D=1366/56e67ae0-b752-11ed-9e3a-eff3d1f75b1e-royal%20huisman.webp'
-    },
-    {
-        id: '3',
-        name: 'Westport 112',
-        price: '500',
-        guests: '100',
-        location: 'trincomali',
-        booking: [],
-        type: 'boat',
-        image: 'https://cdn.northropandjohnson.com/uploads/westport-112-yacht-sales-34M-Profile.jpg'
-    },
-    {
-        id: '4',
-        name: 'Westport 112',
-        price: '500',
-        guests: '50',
-        location: 'galle',
-        booking: [],
-        type: 'Yacht',
-        image: 'https://cdn.northropandjohnson.com/uploads/westport-112-yacht-sales-34M-Profile.jpg'
-    },
-    {
-        id: '5',
-        name: 'Project 406',
-        price: '500',
-        guests: '60',
-        location: 'chilaw',
-        booking: [],
-        type: 'Yacht',
-        image: 'https://cdn.boatinternational.com/convert/files/2023/02/56e67ae0-b752-11ed-9e3a-eff3d1f75b1e-royal%20huisman.jpg/r%5Bwidth%5D=1366/56e67ae0-b752-11ed-9e3a-eff3d1f75b1e-royal%20huisman.webp'
-    },
-]
 
 export const sidebarLinks = [
     {
@@ -106,35 +48,3 @@ export const sidebarLinks = [
     {name: 'User Feedback', url: '/feedback', role: ['admin_feed', 'owner']},
     {name: 'Inventory', url: '/inventory', role: ['admin_invent', 'owner']},
 ]
-
-
-const inventory  = [
-    {
-        id: '1',
-        name: 'amara',
-        items: [
-            {id: 1, food: 100, water: 100, fuel: 10},
-            {id: 2, food: 80, water: -50, fuel: -5},
-            {id: 3, food: -50, water: 50, fuel: 10},
-        ]
-    },
-    {
-        id: '2',
-        name: 'hiru',
-        items: [
-            {id: 1, food: 100, water: 100, fuel: 10},
-            {id: 2, food: 80, water: -50, fuel: -5},
-            {id: 3, food: -50, water: 50, fuel: 10},
-        ]
-    },
-    {
-        id: '3',
-        name: 'gajan',
-        items: [
-            {id: 1, food: 100, water: 100, fuel: 10},
-            {id: 2, food: 80, water: -50, fuel: -5},
-            {id: 3, food: -50, water: 50, fuel: 10},
-        ]
-    }
-]
-

@@ -65,16 +65,6 @@ const Profile = () => {
         getBookingByUser();
     }, [])
 
-    // pagination
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [itemsPerPage] = useState(7);
-    //
-    // const indexOfLastItem = currentPage * itemsPerPage;
-    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // const currentItems = reservation.slice(indexOfFirstItem, indexOfLastItem);
-    // const currentBookings = booking.slice(indexOfFirstItem, indexOfLastItem);
-    //
-    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className={'container mx-auto flex justify-between gap-5 my-8'}>

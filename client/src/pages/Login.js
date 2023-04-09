@@ -57,7 +57,7 @@ const Login = () => {
         setLoading(true)
         try {
             const {login_email, login_password} = formData;
-            const {data} = await axios.post('http://localhost:3001/signin', {
+            const {data} = await axios.post(`${process.env.REACT_APP_BASE_URL}/signin`, {
                 email: login_email,
                 password: login_password
             });
@@ -89,7 +89,7 @@ const Login = () => {
         setLoading(true)
         try {
             const {name, address, email, password, phone} = formData;
-            const {data} = await axios.post('http://localhost:3001/signup', {name, address, email, password, phone});
+            const {data} = await axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, {name, address, email, password, phone});
 
             setSignUpSuccess(data.message);
             setSignUpError('');

@@ -1,15 +1,3 @@
-/**
- * Created by: ishara weerasinghe
- * Date: 2023/04/03
- * Project: YachtRent
- * File: Home
- * features:
- * 1. This is the main page of the application
- * 2. This page contains the header and footer
- * 3. This page contains the main content
- * 4. This page contains the routes for the application
- */
-
 import React from 'react';
 import {Footer, Header} from "../components";
 import Main from "./Main";

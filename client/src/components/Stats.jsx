@@ -1,8 +1,3 @@
-/**
- * @file Stats.jsx
- * @description This file contains the code for the Stats component.
- */
-
 import React from 'react';
 import {AiFillHome} from "react-icons/ai";
 import {IoMdBoat} from "react-icons/io";

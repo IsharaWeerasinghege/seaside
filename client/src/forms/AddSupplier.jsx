@@ -35,7 +35,7 @@ const AddSupplier = () => {
     const submitHandler = async (values) => {
         try {
             const {name, address, phone, email, category, location, nic, password, city} = values;
-            await axios.post('http://localhost:3001/signup', {
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, {
                 name,
                 address,
                 phone,

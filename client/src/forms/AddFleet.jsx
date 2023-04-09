@@ -45,7 +45,7 @@ const AddFleet = () => {
             formData.append('type', values.type);
             formData.append('description', values.description);
 
-            await axios.post('http://localhost:3001/yacht/create', formData, {
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/yacht/create`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data',
                 },

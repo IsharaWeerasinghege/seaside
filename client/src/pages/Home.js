@@ -7,6 +7,7 @@ import Book from "./Book";
 import Login from "./Login";
 import Profile from "./Profile";
 import BookPack from "./BookPack";
+import Fleets from "./Fleets";
 
 const Home = () => {
     return (
@@ -20,6 +21,7 @@ const Home = () => {
                     <Route path={'/package/:id'} element={<BookPack/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/profile'} element={<Profile/>}/>
+                    <Route path={'/fleet'} element={<Fleets />}/>
                 </Routes>
             </div>
             <Footer/>

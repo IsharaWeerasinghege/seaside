@@ -7,6 +7,8 @@ import {GiWaterBottle} from "react-icons/gi";
 import * as yup from "yup";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import {IoMdAdd, IoMdRemove} from "react-icons/io";
+import {Pagination} from "@material-ui/lab";
 
 const initialState = {
     food: '',
@@ -17,6 +19,9 @@ const initialState = {
 const UpdateInventory = () => {
     const {id} = useParams();
     const [data, setData] = useState([]);
+    const [dataArray, setDataArray] = useState([]);
+    const [updateType, setUpdateType] = useState('');
+    const [isData, setIsData] = useState(false);
 
     const inventoryValidationSchema = yup.object().shape({
         food: yup.number().required('Food is required'),
@@ -26,19 +31,27 @@ const UpdateInventory = () => {
     });
 
     useEffect(() => {
-        async function getInventory() {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/inventory/list/${id}`,
-                    {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
-                setData(response.data);
-            } catch (error) {
-                console.log(error);
+        if (!isData) {
+            async function getInventory() {
+                try {
+                    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/inventory/list/${id}`,
+                        {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+                    setData(response.data);
+                    setDataArray(response.data.inventory);
+                    setIsData(true);
+                } catch (error) {
+                    console.log(error);
+                }
             }
+            getInventory();
         }
-        getInventory();
-    }, [addInventory])
+    }, [isData, id, addInventory]);
 
     async function addInventory(values) {
+
+        if (updateType === 'remove') {
+           values  = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, -value]));
+        }
 
         try {
             const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/inventory/update`,
@@ -48,7 +61,18 @@ const UpdateInventory = () => {
         } catch (error) {
             console.log(error);
         }
+
+        setIsData(false);
     }
+
+    // pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(9);
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = dataArray.slice(indexOfFirstItem, indexOfLastItem);
+
 
     return (
         <div className="relative overflow-x-auto shadow-lg sm:rounded-lg bg-white p-4">
@@ -64,19 +88,29 @@ const UpdateInventory = () => {
                     {(formik) => (
                         <Form>
                             <div className="flex justify-center mt-2 gap-2">
-                                <Input icon={<MdFastfood/>} placeholder={'Food'} name={'food'}
+                                <Input icon={<MdFastfood/>} placeholder={'Food'} name={'food'} min={0}
                                        type={'number'}/>
-                                <Input icon={<MdEmojiFoodBeverage/>} placeholder={'Beverage'}
+                                <Input icon={<MdEmojiFoodBeverage/>} placeholder={'Beverage'} min={0}
                                        name={'beverage'}
                                        type={'number'}/>
-                                <Input icon={<BsFuelPumpFill/>} placeholder={'Fuel'} name={'fuel'}
+                                <Input icon={<BsFuelPumpFill/>} placeholder={'Fuel'} name={'fuel'} min={0}
                                        type={'number'}/>
-                                <Input icon={<GiWaterBottle/>} placeholder={'Water'} name={'water'}
+                                <Input icon={<GiWaterBottle/>} placeholder={'Water'} name={'water'} min={0}
                                        type={'number'}/>
-                                <div>
-                                    <button className={'bg-gray-900 text-white px-4 py-2.5 mt-0.5 rounded-md'}
-                                            type={'submit'}>
-                                        Update
+                                <div className={'flex flex-row h-12 gap-2'}>
+                                    <button className={'bg-blue-600 text-white w-12 text-2xl rounded-md grid place-items-center shadow-lg'}
+                                            type={'submit'}
+                                            onClick={() => setUpdateType('add')}
+                                            title={'Add Inventory'}
+                                    >
+                                        <IoMdAdd/>
+                                    </button>
+                                    <button className={'bg-red-600 text-white w-12 text-2xl rounded-md grid place-items-center shadow-lg'}
+                                            type={'submit'}
+                                            onClick={() => setUpdateType('remove')}
+                                            title={'Remove Inventory'}
+                                    >
+                                        <IoMdRemove/>
                                     </button>
                                 </div>
                             </div>
@@ -93,7 +127,7 @@ const UpdateInventory = () => {
                         }>
                             <thead>
                             <tr
-                                className="text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50">
+                                className="text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50 text-center">
                                 <th className={'px-4 py-2'}>
                                 Date
                                 </th>
@@ -112,8 +146,8 @@ const UpdateInventory = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {data?.inventory?.map((item, index) => (
-                                <tr key={index}>
+                            {currentItems?.map((item, index) => (
+                                <tr key={index} className={'text-center'}>
                                     <td className={'px-4 py-2'}>{item.createdAt.slice(0, 10)}</td>
                                     <td className={'px-4 py-2'}>{item.food}</td>
                                     <td className={'px-4 py-2'}>{item.beverage}</td>
@@ -123,6 +157,13 @@ const UpdateInventory = () => {
                             ))}
                             </tbody>
                         </table>
+                    </div>
+                    <div className="flex justify-center mt-2">
+                        <Pagination shape={'rounded'} size={'small'}
+                                    count={Math.ceil(dataArray.length / itemsPerPage)}
+                                    page={currentPage} onChange={
+                            (event, value) => setCurrentPage(value)
+                        }/>
                     </div>
                 </div>
             </div>

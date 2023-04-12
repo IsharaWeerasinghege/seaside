@@ -99,9 +99,11 @@ const AddFleet = () => {
                         name="type"
                         placeholder="Type"
                         list={[
-                            {value: 'boat', label: 'Boat'},
-                            {value: 'ship', label: 'Ship'},
-                            {value: 'catamaran', label: 'Catamaran'}
+                            {value: 'motor', label: 'Motor yachts'},
+                            {value: 'sailing', label: 'Sailing yachts'},
+                            {value: 'catamaran', label: 'Catamaran'},
+                            {value: 'mega', label: 'Mega yachts'},
+                            {value: 'expedition', label: 'Expedition yachts'},
                         ]}
                         onChange={(e) => formik.handleChange(e)}
                     />

@@ -34,11 +34,19 @@ const Header = () => {
                     </li>
 
                     <li>
-                        <Link to={'/yachts'}
+                        <Link to={'/fleet'}
                               className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
-                            Rent Yacht
+                            Fleet
                         </Link>
                     </li>
+
+                    <li>
+                        <Link to={'/yachts'}
+                              className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>
+                            Rent Yachts
+                        </Link>
+                    </li>
+
 
                     <li>
                         <a href={'/#about'} className={"text-slate-900 hover:text-slate-700 text-[15px] font-semibold"}>

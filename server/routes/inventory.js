@@ -67,7 +67,9 @@ export const getInventory = async (req, res) => {
 
 export const getInventoryById = async (req, res) => {
     try {
-        const yacht = await Yacht.findById(req.params.id).populate('items');
+        const yacht = await Yacht.findById(req.params.id).populate({path: 'items', options:{
+                sort: {createdAt: -1}
+            }});
 
         const yachtData = {
             name: yacht.name,

@@ -66,6 +66,7 @@ const Yachts = () => {
                            onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
+
                 <div className={'flex gap-3'}>
                     <label htmlFor="">Type :</label>
                     <select name="guests"
@@ -73,9 +74,11 @@ const Yachts = () => {
                             onChange={(e) => setType(e.target.value)}
                     >
                         <option selected value={''}>All</option>
-                        <option value="boat">Boats</option>
-                        <option value="catamaran">Catamarans</option>
-                        <option value="ship">Ships</option>
+                        <option value="motor">Motor yachts</option>
+                        <option value="sailing">Sailing yachts</option>
+                        <option value="catamaran">Catamaran</option>
+                        <option value="mega">Mega yachts</option>
+                        <option value="expedition">Expedition yachts</option>
                     </select>
                 </div>
                 <div className={'flex gap-3'}>

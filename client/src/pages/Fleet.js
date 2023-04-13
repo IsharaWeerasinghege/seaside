@@ -61,7 +61,7 @@ const Fleet = () => {
                     <Route path={'/'} element={
                         <>
                             <div>
-                                <YachtTable deleteYacht={deleteYacht} yachts={yacht}/>
+                                <YachtTable deleteYacht={deleteYacht} yachts={currentItems}/>
                             </div>
                             <div className="flex justify-center mt-2">
                                 <Pagination shape={'rounded'} size={'small'}

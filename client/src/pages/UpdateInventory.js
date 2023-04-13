@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Form, Formik} from "formik";
 import {Input} from "../elements";
 import {MdEmojiFoodBeverage, MdFastfood} from "react-icons/md";
-import {BsFuelPumpFill} from "react-icons/bs";
 import {GiWaterBottle} from "react-icons/gi";
 import * as yup from "yup";
 import {useParams} from "react-router-dom";
@@ -13,7 +12,6 @@ import {Pagination} from "@material-ui/lab";
 const initialState = {
     food: '',
     beverage: '',
-    fuel: '',
     water: ''
 }
 const UpdateInventory = () => {
@@ -26,7 +24,6 @@ const UpdateInventory = () => {
     const inventoryValidationSchema = yup.object().shape({
         food: yup.number().required('Food is required'),
         beverage: yup.number().required('Beverage is required'),
-        fuel: yup.number().required('Fuel is required'),
         water: yup.number().required('Water is required')
     });
 
@@ -93,8 +90,6 @@ const UpdateInventory = () => {
                                 <Input icon={<MdEmojiFoodBeverage/>} placeholder={'Beverage'} min={0}
                                        name={'beverage'}
                                        type={'number'}/>
-                                <Input icon={<BsFuelPumpFill/>} placeholder={'Fuel'} name={'fuel'} min={0}
-                                       type={'number'}/>
                                 <Input icon={<GiWaterBottle/>} placeholder={'Water'} name={'water'} min={0}
                                        type={'number'}/>
                                 <div className={'flex flex-row h-12 gap-2'}>
@@ -138,9 +133,6 @@ const UpdateInventory = () => {
                                     Beverage
                                 </th>
                                 <th>
-                                    Fuel
-                                </th>
-                                <th>
                                     Water
                                 </th>
                             </tr>
@@ -151,7 +143,6 @@ const UpdateInventory = () => {
                                     <td className={'px-4 py-2'}>{item.createdAt.slice(0, 10)}</td>
                                     <td className={'px-4 py-2'}>{item.food}</td>
                                     <td className={'px-4 py-2'}>{item.beverage}</td>
-                                    <td className={'px-4 py-2'}>{item.fuel}</td>
                                     <td className={'px-4 py-2'}>{item.water}</td>
                                 </tr>
                             ))}

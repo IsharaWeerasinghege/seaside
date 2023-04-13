@@ -7,9 +7,6 @@ const inventoryItemSchema = new mongoose.Schema({
         beverage: {
             type: Number,
         },
-        fuel: {
-            type: Number,
-        },
         water: {
             type: Number,
         },

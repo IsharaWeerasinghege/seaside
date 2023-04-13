@@ -16,19 +16,16 @@ const YachtTable = ({yachts, dashboard, single}) => {
                 </th>
                 {
                     single && (
-                            <th scope="col" className="px-6 py-3">
-                                Date
-                            </th>
-                        )
+                        <th scope="col" className="px-6 py-3">
+                            Date
+                        </th>
+                    )
                 }
                 <th scope="col" className="px-6 py-3">
                     Food
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Beverage
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Fuel
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Water
@@ -61,12 +58,10 @@ const YachtTable = ({yachts, dashboard, single}) => {
                         {item?.inventory?.reduce((a, b) => a + b.food, 0)}
                     </td>
                     <td className="px-6 py-4">
-                    {item?.inventory?.reduce((a, b) => a + b.beverage, 0)}
+                        {item?.inventory?.reduce((a, b) => a + b.beverage, 0)}
                     </td>
                     <td className="px-6 py-4">
-                        {item?.inventory?.reduce((a, b) => a + b.fuel, 0)}
-                    </td> <td className="px-6 py-4">
-                    {item?.inventory?.reduce((a, b) => a + b.water, 0)}
+                        {item?.inventory?.reduce((a, b) => a + b.water, 0)}
                     </td>
                     {!dashboard && !single && (
                         <>

@@ -30,6 +30,44 @@ const yachtSchema = new mongoose.Schema({
     image: {
         type: String,
     },
+    fuelType:{
+        type: String,
+    },
+    fuelCapacity:{
+        type: Number,
+    },
+    fuelRefill: [
+        {
+            timestamp: {
+                type: Date,
+                default: Date.now
+            },
+            amount: {
+                type: Number,
+                required: true,
+            },
+        }
+    ],
+    maintenance: [
+        {
+            date: {
+                type: Date,
+                default: Date.now,
+                required: true
+            },
+            latestDate: {
+                type: Date,
+                default: Date.now,
+                required: true
+            },
+            nextDate: {
+                type: Date,
+            },
+            description: {
+                type: String,
+            }
+        }
+    ],
     items: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'InventoryItem'

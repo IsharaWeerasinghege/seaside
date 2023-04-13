@@ -41,6 +41,7 @@ export const sidebarLinks = [
     {name: 'Create Package', url: '/package/create', role: ['admin_party', 'owner']},
     {name: 'Fleet Management', url: '/fleet', role: ['admin_fleet', 'owner']},
     {name: 'Add Fleet', url: '/fleet/add', role: ['admin_fleet', 'owner']},
+    {name: 'Fuel Status', url: '/fleet/fuel', role: ['admin_fleet', 'owner']},
     {name: 'Crew Management', url: '/crew', role: ['admin_crew', 'owner']},
     {name: 'Add Member', url: '/crew/add', role: ['admin_crew', 'owner']},
     {name: 'Suppliers', url: '/suppliers', role: ['admin_shm', 'owner']},

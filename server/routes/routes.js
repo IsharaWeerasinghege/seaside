@@ -1,7 +1,7 @@
 import express from 'express';
 import {signIn, signUp} from "./auth.js";
 import {viewProfile} from "./client.js";
-import {deleteYacht, filterYacht, updateYacht, viewYacht, viewYachtList} from "./admin.js";
+import {deleteYacht, filterYacht, fuelRefill, updateYacht, viewYacht, viewYachtList} from "./admin.js";
 import {verifyToken} from "../middleware/auth.js";
 import {deleteCrewMember, getCrewMember, updateCrewMember, viewCrewList} from "./crew.js";
 import {viewSupplier} from "./supplier.js";
@@ -63,6 +63,7 @@ router.post('/yacht/filter', filterYacht);
 router.get('/yacht/:id', viewYacht);
 router.delete('/yacht/delete/:id', verifyToken, deleteYacht);
 router.put('/yacht/update/:id', verifyToken, updateYacht)
+router.post('/yacht/refill', verifyToken, fuelRefill);
 
 /**
  * feedback routes

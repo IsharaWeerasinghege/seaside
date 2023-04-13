@@ -4,14 +4,15 @@ import * as Yup from "yup";
 import {Input, Textarea} from "../elements";
 import {FaAddressCard, FaSave, FaUser, FaWarehouse} from "react-icons/fa";
 import {SiMinutemailer} from "react-icons/si";
-import {BsFillPhoneFill} from "react-icons/bs";
+import {BsFillFuelPumpFill, BsFillPhoneFill} from "react-icons/bs";
 import {BiCategory} from "react-icons/bi";
 import axios from "axios";
 import Select from "../elements/Select";
 import {useParams} from "react-router-dom";
+import {GiFuelTank} from "react-icons/gi";
 
 const initialState = {
-    fleetName: '', length: '', capacity: '', price: '', rooms: '', location: '', type: '', description: '',
+    fleetName: '', length: '', capacity: '', price: '', rooms: '', location: '', type: '', description: '', fuelType: '', fuelCapacity: ''
 };
 
 const validationSchema = Yup.object({
@@ -23,6 +24,8 @@ const validationSchema = Yup.object({
     location: Yup.string().required('Location is required'),
     type: Yup.string().required('Type is required'),
     description: Yup.string().required('Description is required'),
+    fuelType: Yup.string().required('Fuel type is required'),
+    fuelCapacity: Yup.number().required('Fuel capacity is required'),
 })
 
 const EditFleet = () => {
@@ -37,7 +40,7 @@ const EditFleet = () => {
     async function getFleet() {
         try {
             const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/yacht/${id}`);
-            const {name, length, capacity, price, rooms, location, type, description} = response.data;
+            const {name, length, capacity, price, rooms, location, type, description, fuelType, fuelCapacity} = response.data;
 
             initialState.fleetName = name;
             initialState.type = type;
@@ -47,6 +50,8 @@ const EditFleet = () => {
             initialState.price = price;
             initialState.rooms = rooms;
             initialState.description = description;
+            initialState.fuelType = fuelType;
+            initialState.fuelCapacity = fuelCapacity;
 
 
         } catch (e) {
@@ -56,10 +61,10 @@ const EditFleet = () => {
 
     const submitHandler = async (values) => {
         try {
-            const {fleetName, length, capacity, price, rooms, location, type, description} = values;
+            const {fleetName, length, capacity, price, rooms, location, type, description, fuelType, fuelCapacity} = values;
 
             await axios.put(`${process.env.REACT_APP_BASE_URL}/yacht/update/${id}`, {
-                fleetName, length, capacity, price, rooms, location, type, description
+                fleetName, length, capacity, price, rooms, location, type, description, fuelType, fuelCapacity
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -120,6 +125,28 @@ const EditFleet = () => {
                         type="tel"
                         name="length"
                         placeholder="Length"
+                        onChange={(e) => formik.handleChange(e)}
+                    />
+                </div>
+                <div className={'w-full flex justify-between gap-4'}>
+                    <Select
+                        icon={<BsFillFuelPumpFill/>}
+                        type="text"
+                        name="fuelType"
+                        placeholder="Feul Type"
+                        list={[
+                            {value: 'Diesel', label: 'Diesel'},
+                            {value: 'Gasoline', label: 'Gasoline'},
+                            {value: 'Electric', label: 'Electric'},
+                            {value: 'Hybrid', label: 'Hybrid'},
+                        ]}
+                        onChange={(e) => formik.handleChange(e)}
+                    />
+                    <Input
+                        icon={<GiFuelTank/>}
+                        type="tel"
+                        name="fuelCapacity"
+                        placeholder="Fuel Capacity"
                         onChange={(e) => formik.handleChange(e)}
                     />
                 </div>

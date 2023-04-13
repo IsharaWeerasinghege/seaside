@@ -6,13 +6,14 @@ import * as Yup from "yup";
 import {Input, Textarea} from "../elements";
 import {FaAddressCard, FaImage, FaSave, FaUser, FaWarehouse} from "react-icons/fa";
 import {SiMinutemailer} from "react-icons/si";
-import {BsFillPhoneFill} from "react-icons/bs";
+import {BsFillFuelPumpFill, BsFillPhoneFill} from "react-icons/bs";
 import {BiCategory} from "react-icons/bi";
 import axios from "axios";
 import Select from "../elements/Select";
+import {GiFuelTank} from "react-icons/gi";
 
 const initialState = {
-    fleetName: '', length: '', capacity: '', price: '', rooms: '', location: '', type: '', description: '',
+    fleetName: '', length: '', capacity: '', price: '', rooms: '', location: '', type: '', description: '', fuelType: '', fuelCapacity: ''
 };
 
 const validationSchema = Yup.object({
@@ -24,6 +25,8 @@ const validationSchema = Yup.object({
     location: Yup.string().required('Location is required'),
     type: Yup.string().required('Type is required'),
     description: Yup.string().required('Description is required'),
+    fuelType: Yup.string().required('Fuel type is required'),
+    fuelCapacity: Yup.number().required('Fuel capacity is required'),
 })
 
 const AddFleet = () => {
@@ -33,6 +36,7 @@ const AddFleet = () => {
     const [success, setSuccess] = useState('');
 
     const submitHandler = async (values) => {
+        console.log(values)
         try {
             const formData = new FormData();
             formData.append('image', file);
@@ -44,6 +48,8 @@ const AddFleet = () => {
             formData.append('location', values.location);
             formData.append('type', values.type);
             formData.append('description', values.description);
+            formData.append('fuelType', values.fuelType);
+            formData.append('fuelCapacity', values.fuelCapacity);
 
             await axios.post(`${process.env.REACT_APP_BASE_URL}/yacht/create`, formData, {
                 headers: {
@@ -112,6 +118,28 @@ const AddFleet = () => {
                         type="tel"
                         name="length"
                         placeholder="Length"
+                        onChange={(e) => formik.handleChange(e)}
+                    />
+                </div>
+                <div className={'w-full flex justify-between gap-4'}>
+                    <Select
+                        icon={<BsFillFuelPumpFill/>}
+                        type="text"
+                        name="fuelType"
+                        placeholder="Feul Type"
+                        list={[
+                            {value: 'Diesel', label: 'Diesel'},
+                            {value: 'Gasoline', label: 'Gasoline'},
+                            {value: 'Electric', label: 'Electric'},
+                            {value: 'Hybrid', label: 'Hybrid'},
+                        ]}
+                        onChange={(e) => formik.handleChange(e)}
+                    />
+                    <Input
+                        icon={<GiFuelTank/>}
+                        type="tel"
+                        name="fuelCapacity"
+                        placeholder="Fuel Capacity"
                         onChange={(e) => formik.handleChange(e)}
                     />
                 </div>

@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
  * fleet management
  */
 export const createYacht = async (req, res) => {
-    const {fleetName, length, capacity, price, rooms, location, type, description} = req.body;
+    const {fleetName, length, capacity, price, rooms, location, type, description, fuelType, fuelCapacity} = req.body;
     const yacht = new Yacht({
         name: fleetName,
         length,
@@ -21,6 +21,8 @@ export const createYacht = async (req, res) => {
         location,
         type,
         description,
+        fuelType,
+        fuelCapacity,
         image: req.file.filename
     });
 
@@ -39,7 +41,13 @@ export const createYacht = async (req, res) => {
 
 export const viewYachtList = async (req, res) => {
     try {
-        const yachts = await Yacht.find();
+        const yachts = await Yacht.aggregate([
+            {
+                $addFields: {
+                    totalFuelRefillAmount: {$sum: "$fuelRefill.amount"}
+                }
+            }
+        ]);
 
         res.status(200).json(yachts);
     } catch (error) {
@@ -120,7 +128,7 @@ export const filterYacht = async (req, res) => {
 
 export const updateYacht = async (req, res) => {
     const {id} = req.params;
-    const {fleetName, length, capacity, price, rooms, location, type, description} = req.body;
+    const {fleetName, length, capacity, price, rooms, location, type, description, fuelType, fuelCapacity} = req.body;
     try {
         const yacht = await Yacht.findById(id);
         if (yacht) {
@@ -132,11 +140,35 @@ export const updateYacht = async (req, res) => {
             yacht.location = location;
             yacht.type = type;
             yacht.description = description;
+            yacht.fuelType = fuelType;
+            yacht.fuelCapacity = fuelCapacity;
             if (req.file) {
                 yacht.image = req.file.filename;
             }
             await yacht.save();
             res.status(200).json({message: 'yacht updated successfully'});
+        } else {
+            throw new Error('yacht not found');
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+/**
+ * fuel refill
+ */
+
+export const fuelRefill = async (req, res) => {
+    const {id, amount } = req.body;
+
+
+    try {
+        const yacht = await Yacht.findById(id);
+        if (yacht) {
+            yacht.fuelRefill.push({amount});
+            await yacht.save();
+            res.status(200).json({message: 'fuel refill successfully'});
         } else {
             throw new Error('yacht not found');
         }

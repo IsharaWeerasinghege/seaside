@@ -5,7 +5,7 @@ import InventoryItem from "../models/inventory.js";
  * get inventory by id
  */
 export const addInventoryItems = async (req, res) => {
-    const { yachtId, food, beverage, fuel, water } = req.body;
+    const { yachtId, food, beverage, water } = req.body;
 
     try {
         const yacht = await Yacht.findById(yachtId);
@@ -18,7 +18,6 @@ export const addInventoryItems = async (req, res) => {
         const inventoryItem = new InventoryItem({
             food,
             beverage,
-            fuel,
             water
         });
 
@@ -50,7 +49,6 @@ export const getInventory = async (req, res) => {
             inventory: yacht.items.map(item => ({
                 food: item.food,
                 beverage: item.beverage,
-                fuel: item.fuel,
                 water: item.water
             }))
         }));

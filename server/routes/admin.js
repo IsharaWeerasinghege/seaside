@@ -160,7 +160,7 @@ export const updateYacht = async (req, res) => {
  */
 
 export const fuelRefill = async (req, res) => {
-    const {id, amount } = req.body;
+    const {id, amount} = req.body;
 
 
     try {
@@ -176,4 +176,59 @@ export const fuelRefill = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
+
+/**
+ * add maintenance
+ */
+export const addMaintenance = async (req, res) => {
+    const {id, latestDate, nextDate, description} = req.body;
+
+    try {
+        const yacht = await Yacht.findById(id);
+        if (yacht) {
+            yacht.maintenance.push({latestDate, nextDate, description});
+            await yacht.save();
+            res.status(200).json({message: 'maintenance added successfully'});
+        } else {
+            throw new Error('yacht not found');
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
+/**
+ * get maintenance
+ */
+export const getAllYachtMaintenanceDetails = async (req, res) => {
+    try {
+        const yachts = await Yacht.find();
+
+        const yachtMaintenanceDetails = yachts.map((yacht) => {
+            const latestMaintenanceRecord =
+                yacht.maintenance.length > 0
+                    ? yacht.maintenance.sort(
+                        (a, b) => b.latestDate - a.latestDate
+                    )[0]
+                    : null;
+            const latestDate = latestMaintenanceRecord?.latestDate?.toISOString().slice(0, 10);
+            const nextDate = latestMaintenanceRecord?.nextDate?.toISOString().slice(0, 10);
+            const description = latestMaintenanceRecord?.description;
+            return {
+                _id: yacht._id,
+                Name: yacht.name,
+                latestMaintenanceDate: latestDate,
+                nextMaintenanceDate: nextDate,
+                maintenanceDescription: description,
+            };
+        });
+
+        // Return the array of yacht maintenance details to the client
+        res.json(yachtMaintenanceDetails);
+    } catch (error) {
+        // Handle errors
+        console.log(error);
+        res.status(500).json({message: "Server error"});
+    }
+};
 

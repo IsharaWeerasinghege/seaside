@@ -30,10 +30,10 @@ const yachtSchema = new mongoose.Schema({
     image: {
         type: String,
     },
-    fuelType:{
+    fuelType: {
         type: String,
     },
-    fuelCapacity:{
+    fuelCapacity: {
         type: Number,
     },
     fuelRefill: [
@@ -53,7 +53,6 @@ const yachtSchema = new mongoose.Schema({
             date: {
                 type: Date,
                 default: Date.now,
-                required: true
             },
             latestDate: {
                 type: Date,

@@ -1,15 +1,27 @@
 import express from 'express';
 import {signIn, signUp} from "./auth.js";
 import {viewProfile} from "./client.js";
-import {deleteYacht, filterYacht, fuelRefill, updateYacht, viewYacht, viewYachtList} from "./admin.js";
+import {
+    addMaintenance,
+    deleteYacht,
+    filterYacht,
+    fuelRefill,
+    getAllYachtMaintenanceDetails,
+    updateYacht,
+    viewYacht,
+    viewYachtList
+} from "./admin.js";
 import {verifyToken} from "../middleware/auth.js";
 import {deleteCrewMember, getCrewMember, updateCrewMember, viewCrewList} from "./crew.js";
 import {viewSupplier} from "./supplier.js";
 import {
     createBooking,
-    createReservation, getBookingList, getBookingListByUser,
+    createReservation,
+    getBookingList,
+    getBookingListByUser,
     getReservationList,
-    getReservationListByUser, updateBookingStatus,
+    getReservationListByUser,
+    updateBookingStatus,
     updateReservationStatus
 } from "./reservation.js";
 import {createFeedback, getFeedbackList, updateFeedbackStatus} from "./feedback.js";
@@ -64,6 +76,8 @@ router.get('/yacht/:id', viewYacht);
 router.delete('/yacht/delete/:id', verifyToken, deleteYacht);
 router.put('/yacht/update/:id', verifyToken, updateYacht)
 router.post('/yacht/refill', verifyToken, fuelRefill);
+router.post('/yacht/maintenance/add', verifyToken, addMaintenance);
+router.get('/yacht/maintenance/list', getAllYachtMaintenanceDetails);
 
 /**
  * feedback routes

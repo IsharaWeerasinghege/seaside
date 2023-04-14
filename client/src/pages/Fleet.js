@@ -71,7 +71,7 @@ const Fleet = () => {
                         </>
                     }/>
 
-                    <Route path={'/add'} element={<AddFleet/>}/>
+
                     <Route path={'/edit/:id'} element={<EditFleet/>}/>
                 </Routes>
 

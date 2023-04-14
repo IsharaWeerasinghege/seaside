@@ -14,6 +14,8 @@ import CreatePack from "./CreatePack";
 import Inventory from "./Inventory";
 import UpdateInventory from "./UpdateInventory";
 import Fuel from "./Fuel";
+import AddFleet from "../forms/AddFleet";
+import Maintenance from "./Maintenance";
 
 const AdminPanel = () => {
     const [links, setLinks] = React.useState([]);
@@ -59,7 +61,9 @@ const AdminPanel = () => {
                         <Route path={'reservation'} element={<Reservation/>}/>
                         <Route path={'party'} element={<Party/>}/>
                         <Route path={'fleet/*'} element={<Fleet/>}/>
+                        <Route path={'fleet/add'} element={<AddFleet/>}/>
                         <Route path={'fleet/fuel'} element={<Fuel/>}/>
+                        <Route path={'fleet/maintenance'} element={<Maintenance/>}/>
                         <Route path={'feedback/*'} element={<Feedback/>}/>
                         <Route path={'crew/*'} element={<Crew/>}/>
                         <Route path={'suppliers/*'} element={<Suppliers/>}/>

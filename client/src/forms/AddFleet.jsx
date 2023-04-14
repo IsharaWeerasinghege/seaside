@@ -74,7 +74,8 @@ const AddFleet = () => {
         }, 10000)
     }
 
-    return (<>
+    return (
+        <div className="relative overflow-x-auto shadow-lg sm:rounded-lg bg-white p-4">
         <Formik
             initialValues={initialState}
             validationSchema={validationSchema}
@@ -200,7 +201,8 @@ const AddFleet = () => {
                 </button>
             </Form>)}
         </Formik>
-    </>);
+        </div>
+    );
 };
 
 export default AddFleet;
